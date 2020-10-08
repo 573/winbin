@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+REPOS=(bib:origin:master cert:origin:master education:origin:main glosario:upstream:master gvw:origin:master merely:upstream:book stjs:origin:master t3:origin:master thirdbit:origin:master tidyblocks:origin:master todo:origin:master trainers:origin:master)
+for entry in ${REPOS[*]}
+do
+  fields=($(echo $entry | tr ":" "\n"))
+  repo="${HOME}/${fields[0]}"
+  source=${fields[1]}
+  branch=${fields[2]}
+  echo "${repo} ${source} ${branch}"
+  git -C ${repo} checkout ${branch}
+  git -C ${repo} pull ${source} ${branch}
+  echo ""
+done
